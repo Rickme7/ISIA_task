@@ -39,9 +39,7 @@ public class Matriz {
         int i, j, filasA, columnasA; 
         filasA = a.getDimension().height; 
         columnasA = a.getDimension().width; 
-        //System.out.println("Dimension a:" + a.getDimension());
         Matriz matrizResultante = new Matriz(filasA, columnasA, false);
-        //System.out.println("Dimension r:" + matrizResultante.getDimension());
         for (i = 0; i < filasA; i++) { 
             for (j = 0; j < columnasA; j++) { 
                 matrizResultante.datos[i][j] += a.datos[i][j] + b.datos[i][j]; 
@@ -49,6 +47,20 @@ public class Matriz {
         } 
         return matrizResultante; 
     } 
+    
+    public static Matriz transponerMatriz(Matriz a) throws DimensionesIncompatibles { 
+        
+        int i, j, filasA, columnasA; 
+        filasA = a.getDimension().height; 
+        columnasA = a.getDimension().width;
+        Matriz matrizResultante = new Matriz(columnasA, filasA, false);
+        for (i = 0; i < filasA; i++) { 
+            for (j = 0; j < columnasA; j++) { 
+                matrizResultante.datos[j][i] = a.datos[i][j]; 
+            } 
+        }
+        return matrizResultante;
+    }
 
     @Override
     public String toString(){
