@@ -69,7 +69,20 @@ public class Matriz {
         return matrizResultante;
     }
     
-    
+    public static Matriz transponerMatriz(Matriz a) throws DimensionesIncompatibles { 
+        
+        int i, j, filasA, columnasA; 
+        filasA = a.getDimension().height; 
+        columnasA = a.getDimension().width;
+        Matriz matrizResultante = new Matriz(columnasA, filasA, false);
+        for (i = 0; i < filasA; i++) { 
+            for (j = 0; j < columnasA; j++) { 
+                matrizResultante.datos[j][i] = a.datos[i][j]; 
+            } 
+        }
+        return matrizResultante;
+    }
+
     @Override
     public String toString(){
         String ret = "";
