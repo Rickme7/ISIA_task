@@ -34,14 +34,16 @@ public class Matriz {
         return new Dimension(datos[0].length, datos.length); 
     }
     
+    public Dimension getDimensionInv(){
+        return new Dimension(datos.length, datos[0].length);
+    }
+    
     public static Matriz sumarDosMatrices(Matriz a, Matriz b) throws DimensionesIncompatibles { 
         if(! a.getDimension().equals(b.getDimension())) throw new DimensionesIncompatibles("La suma de matrices requiere matrices de las mismas dimensiones");        
         int i, j, filasA, columnasA; 
         filasA = a.getDimension().height; 
         columnasA = a.getDimension().width; 
-        //System.out.println("Dimension a:" + a.getDimension());
         Matriz matrizResultante = new Matriz(filasA, columnasA, false);
-        //System.out.println("Dimension r:" + matrizResultante.getDimension());
         for (i = 0; i < filasA; i++) { 
             for (j = 0; j < columnasA; j++) { 
                 matrizResultante.datos[i][j] += a.datos[i][j] + b.datos[i][j]; 
@@ -49,7 +51,25 @@ public class Matriz {
         } 
         return matrizResultante; 
     } 
-
+    
+    public static Matriz multiplicarDosMatrices(Matriz a, Matriz b) throws DimensionesIncompatibles { 
+        if(! a.getDimension().equals(b.getDimensionInv()) ) throw new DimensionesIncompatibles("La multiplicacion de matrices requiere matrices de dimensiones compatibles");
+        int i, j, k, filasA, columnasA, columnasB; 
+        filasA = a.getDimension().height; 
+        columnasA = a.getDimension().width; 
+        columnasB = b.getDimension().width; 
+        Matriz matrizResultante = new Matriz(filasA, columnasB, false);  
+        for (i = 0; i < filasA; i++) {
+            for (j = 0; j < columnasB; j++) {
+                for (k = 0; k < columnasA; k++) {
+                    matrizResultante.datos[i][j] += a.datos[i][k] * b.datos[k][j];
+                }
+            }
+        }
+        return matrizResultante;
+    }
+    
+    
     @Override
     public String toString(){
         String ret = "";
